@@ -15,6 +15,7 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
         env = super().get_recipe_env(arch, with_flags_in_cc)
         #env['PYTHON_ROOT'] = self.ctx.get_python_install_dir()
         #env['LIBS'] = env.get('LIBS', '') + ' -landroid'
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -include stdint.h'
         return env
     
 recipe = PyZintRecipe()
