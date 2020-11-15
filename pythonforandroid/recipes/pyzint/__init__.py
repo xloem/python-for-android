@@ -8,11 +8,13 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
     blake2bsum = '84757348b619429633ba40117f1c68ddd9c932559afc664e8b156126642ce7562b20f18cbdc47ae158c00959be026ca18dc71974d785c434cc29948929799878'
 
     depends = ['setuptools']
+    
+    call_hostpython_via_targetpython = False
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
-        env['PYTHON_ROOT'] = self.ctx.get_python_install_dir()
-        env['LIBS'] = env.get('LIBS', '') + ' -landroid'
+        #env['PYTHON_ROOT'] = self.ctx.get_python_install_dir()
+        #env['LIBS'] = env.get('LIBS', '') + ' -landroid'
         return env
     
 recipe = PyZintRecipe()
