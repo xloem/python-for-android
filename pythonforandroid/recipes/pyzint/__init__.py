@@ -1,14 +1,22 @@
 from os.path import join
+from pythonforandroid.logger import shprint, info, debug, warning
 from pythonforandroid.recipe import CompiledComponentsPythonRecipe
+import sh
 
 class PyZintRecipe(CompiledComponentsPythonRecipe):
     version = '33821f2e184cbb4055f799fa01745ea7750543ba'
-    url = 'https://github.com/xloem/pyzint/archive/{version}.tar.gz#sha256=393fe78d9f1fad36530c403b665c4363438d5ff30635ccd89a86c65d2e1dfdd7'
-    md5sum = 'c4714892dd314bf276175d263e3ab4ce'
+    git = 'https://github.com/xloem/pyzint'
 
     depends = ['setuptools']
     
     call_hostpython_via_targetpython = False
+
+    def prebuild_arch(self, arch):
+        super().prebuild_arch(arch)
+        build_dir = self.get_build_dir(arch.arch)
+        shprint(sh.git, 'clone', self.git, build_dir)
+        shprint(sh.git, 'checkout', self.version, _cwd=build_dir)
+        shprint(sh.git, 'submodule', 'update', '--init', '--recursive', _cwd=build_dir)
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
