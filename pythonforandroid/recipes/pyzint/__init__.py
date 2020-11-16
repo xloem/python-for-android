@@ -14,15 +14,15 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
     def prebuild_arch(self, arch):
         super().prebuild_arch(arch)
         build_dir = self.get_build_dir(arch.arch)
-        shprint(sh.git, 'clone', self.git, build_dir)
-        shprint(sh.git, 'checkout', self.version, _cwd=build_dir)
-        shprint(sh.git, 'submodule', 'update', '--init', '--recursive', _cwd=build_dir)
+        env = self.get_recipe_env(arch)
+        shprint(sh.git, 'clone', self.git, build_dir, _env=env)
+        shprint(sh.git, 'checkout', self.version, _cwd=build_dir, _env=env)
+        shprint(sh.git, 'submodule', 'update', '--init', '--recursive', _cwd=build_dir, _env=env)
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
-        #env['PYTHON_ROOT'] = self.ctx.get_python_install_dir()
-        #env['LIBS'] = env.get('LIBS', '') + ' -landroid'
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -include stdint.h'
+        env['GIT_SSH'] = 'ssh -o "UserKnownHostsFile ' + join(self.get_recipe_dir(), 'known_hosts') + '"'
         return env
     
 recipe = PyZintRecipe()
