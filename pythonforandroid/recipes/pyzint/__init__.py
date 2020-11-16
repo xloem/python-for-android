@@ -9,7 +9,7 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
 
     depends = ['setuptools']
     
-    call_hostpython_via_targetpython = False
+    #call_hostpython_via_targetpython = False
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
