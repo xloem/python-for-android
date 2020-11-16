@@ -2,10 +2,10 @@ from os.path import join
 from pythonforandroid.recipe import CompiledComponentsPythonRecipe
 
 class PyZintRecipe(CompiledComponentsPythonRecipe):
-    version = '0.1.7'
-    url = 'https://files.pythonhosted.org/packages/39/42/b13d638dd53021c037544e404e18c785f4f4f9235afc7127efb95b9c5527/pyzint-0.1.7.tar.gz#sha256=f06e764780d157a1d319f83390ed67e366d215247678f189d93d24943ace1765'
-    md5sum = '8f3ad6dc515bbab2fb25b207397a792f'
-    blake2bsum = '84757348b619429633ba40117f1c68ddd9c932559afc664e8b156126642ce7562b20f18cbdc47ae158c00959be026ca18dc71974d785c434cc29948929799878'
+    version = '0.1.8'
+    url = 'https://files.pythonhosted.org/packages/bc/49/ff6ef23a049e9c6a3b447b9bf4dc366a5bd7aca23e950a690e8d2caaaf03/pyzint-{version}.tar.gz#sha256=097680466997af0145b65391f012ba5a73f3b041a4ca27378633ead2d5922ad2'
+    md5sum = '3db52703b84f0b3b47d403f05d71a080'
+    blake2bsum = '02f231384bd3eaea30c68f9885946d8be5c0dcdd3ffa24790966756c110499fdc5644e90343bc24b7315cff39b477ba7b566038f0707a8c84cdf201f2307d3e0'
 
     depends = ['setuptools']
     
@@ -13,8 +13,6 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
-        #env['PYTHON_ROOT'] = self.ctx.get_python_install_dir()
-        #env['LIBS'] = env.get('LIBS', '') + ' -landroid'
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -include stdint.h'
         return env
     
