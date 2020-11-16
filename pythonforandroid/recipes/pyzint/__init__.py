@@ -8,6 +8,7 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
     git = 'https://github.com/xloem/pyzint'
 
     depends = ['setuptools']
+    patches = ['submodule_urls.patch']
     
     call_hostpython_via_targetpython = False
 
@@ -17,12 +18,13 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
         env = self.get_recipe_env(arch)
         shprint(sh.git, 'clone', self.git, build_dir, _env=env)
         shprint(sh.git, 'checkout', self.version, _cwd=build_dir, _env=env)
+        self.apply_patch('submodule_urls.patch', arch.arch, build_dir=build_dir)
         shprint(sh.git, 'submodule', 'update', '--init', '--recursive', _cwd=build_dir, _env=env)
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -include stdint.h'
-        env['GIT_SSH_COMMAND'] = 'ssh -o "UserKnownHostsFile ' + join(self.get_recipe_dir(), 'known_hosts') + '"'
+        #env['GIT_SSH_COMMAND'] = 'ssh -o "UserKnownHostsFile ' + join(self.get_recipe_dir(), 'known_hosts') + '"'
         return env
     
 recipe = PyZintRecipe()
