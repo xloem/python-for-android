@@ -1,5 +1,5 @@
-from os.path import join
 from pythonforandroid.recipe import CompiledComponentsPythonRecipe
+
 
 class PyZintRecipe(CompiledComponentsPythonRecipe):
     version = '0.1.8'
@@ -8,12 +8,11 @@ class PyZintRecipe(CompiledComponentsPythonRecipe):
     blake2bsum = '02f231384bd3eaea30c68f9885946d8be5c0dcdd3ffa24790966756c110499fdc5644e90343bc24b7315cff39b477ba7b566038f0707a8c84cdf201f2307d3e0'
 
     depends = ['setuptools']
-    
-    #call_hostpython_via_targetpython = False
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -include stdint.h'
         return env
-    
+
+
 recipe = PyZintRecipe()
