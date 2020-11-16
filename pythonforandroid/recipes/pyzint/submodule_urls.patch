@@ -1,0 +1,13 @@
+diff --git a/.gitmodules b/.gitmodules
+index 276d6d8..5276f17 100644
+--- a/.gitmodules
++++ b/.gitmodules
+@@ -1,6 +1,6 @@
+ [submodule "cyzint/src/zint"]
+ 	path = cyzint/src/zint
+-	url = git@github.com:Pavkazzz/zint.git
++	url = https://github.com/Pavkazzz/zint.git
+ [submodule "pyzint/src/zint"]
+ 	path = pyzint/src/zint
+-	url = git@github.com:Pavkazzz/zint.git
++	url = https://github.com/Pavkazzz/zint.git
