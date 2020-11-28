@@ -5,6 +5,7 @@ from multiprocessing import cpu_count
 import os
 import sh
 
+
 class LibLeptonicaRecipe(Recipe):
     version = '1.80.0'
     url = 'https://github.com/DanBloomberg/leptonica/releases/download/{version}/leptonica-{version}.tar.gz'
@@ -21,7 +22,7 @@ class LibLeptonicaRecipe(Recipe):
         build_dir = os.path.join(source_dir, 'build')
         install_dir = os.path.join(source_dir, 'install')
         shprint(sh.mkdir, '-p', build_dir)
-        
+
         with current_directory(build_dir):
             shprint(sh.cmake, source_dir,
                     '-DANDROID_ABI={}'.format(arch.arch),
@@ -43,5 +44,6 @@ class LibLeptonicaRecipe(Recipe):
 
             # make the install so we can get the config header with the other headers
             shprint(sh.make, 'install', _env=env)
+
 
 recipe = LibLeptonicaRecipe()

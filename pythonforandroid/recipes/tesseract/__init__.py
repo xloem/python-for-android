@@ -5,6 +5,7 @@ from multiprocessing import cpu_count
 import os
 import sh
 
+
 class TesseractRecipe(Recipe):
     version = '3.05.02'
     url = 'https://github.com/tesseract-ocr/tesseract/archive/{version}.tar.gz'
@@ -27,7 +28,7 @@ class TesseractRecipe(Recipe):
 
         source_dir = self.get_build_dir(arch.arch)
 
-        with current_directory(source_dir)
+        with current_directory(source_dir):
             shprint(sh.Command('./autogen.sh'))
             shprint(
                 sh.Command('./configure'),
@@ -42,5 +43,6 @@ class TesseractRecipe(Recipe):
 
             # make the install so the headers are collected in the right subfolder
             shprint(sh.make, 'installl', _env=env)
+
 
 recipe = TesseractRecipe()
