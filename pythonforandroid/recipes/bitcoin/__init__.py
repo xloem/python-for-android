@@ -15,6 +15,12 @@ class BitcoinRecipe(Recipe):
 
     depends = ['libsecp256k1']
 
+    def get_recipe_env(self, arch=None, with_flags_in_cc=True):
+        env = super().get_recipe_env(arch, with_flags_in_cc)
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{}'.format(self.stl_include_dir)
+
+        env['LDFLAGS'] = env.get('LDFLAGS', '') + ' -L{} -l{}'.format(self.get_stl_lib_dir(arch), self.stl_lib_name)
+
     def build_arch(self, arch: Arch) -> None:
         env = self.get_recipe_env(arch)
         with current_directory(self.get_build_dir(arch.arch)):
