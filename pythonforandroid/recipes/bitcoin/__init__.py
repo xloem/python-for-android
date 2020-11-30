@@ -24,7 +24,7 @@ class BitcoinRecipe(Recipe):
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} -I{}'.format(
                 self.stl_include_dir,
                 libdb_dir
-            )
+        )
 
         env['LDFLAGS'] = env.get('LDFLAGS', '') + ' -L{} -l{}'.format(
             self.get_stl_lib_dir(arch),
