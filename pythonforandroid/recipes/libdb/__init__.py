@@ -8,8 +8,8 @@ from multiprocessing import cpu_count
 
 class LibDBRecipe(Recipe):
     version = '18.1.32'
-    url = 'https://fossies.org/linux/misc/db-{version}.tar.gz'
-    sha256sum = '0cecb2ef0c67b166de93732769abdeba0555086d51de1090df325e18ee8da9c8'
+    url = 'https://distfiles.gentoo.org/distfiles/db-{version}.tar.gz'
+    sha256sum = 'fa1fe7de9ba91ad472c25d026f931802597c29f28ae951960685cde487c8d654'
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
 
