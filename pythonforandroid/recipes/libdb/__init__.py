@@ -18,8 +18,15 @@ class LibDBRecipe(Recipe):
 
         openssl_recipe = self.get_recipe('openssl', self.ctx)
 
-        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + openssl_recipe.include_flags(arch)
-        env['LDFLAGS'] = env.get('LDFLAGS', '') + openssl_recipe.link_dirs_flags(arch)
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + '{} -I {}'.format(
+            openssl_recipe.include_flags(arch),
+            self.stl_include_dir
+        )
+        env['LDFLAGS'] = env.get('LDFLAGS', '') + ' {} -L{} -l{}'.format(
+            openssl_recipe.link_dirs_flags(arch),
+            self.get_stl_lib_dir(arch),
+            self.stl_lib_name
+        )
         env['LIBS'] = env.get('LIBS', '') + openssl_recipe.link_libs_flags()
 
         with current_directory(join(
