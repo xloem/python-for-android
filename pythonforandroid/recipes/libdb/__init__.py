@@ -8,7 +8,7 @@ from multiprocessing import cpu_count
 
 class LibDBRecipe(Recipe):
     version = '18.1.32'
-    url = 'https://distfiles.gentoo.org/distfiles/db-{version}.tar.gz'
+    url = 'https://gentoo.osuosl.org/distfiles/db-{version}.tar.gz'
     sha256sum = 'fa1fe7de9ba91ad472c25d026f931802597c29f28ae951960685cde487c8d654'
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
