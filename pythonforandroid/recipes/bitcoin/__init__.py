@@ -13,17 +13,19 @@ class BitcoinRecipe(Recipe):
     url = 'https://bitcoincore.org/bin/bitcoin-core-{version}/bitcoin-{version}.tar.gz'
     sha256sum = '4bbd62fd6acfa5e9864ebf37a24a04bc2dcfe3e3222f056056288d854c53b978'
 
-    depends = ['libsecp256k1', 'libdb48', 'libevent']
+    depends = ['libsecp256k1', 'libdb48', 'libevent', 'boost']
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
 
         libdb_recipe = self.get_recipe('libdb48', self.ctx)
         libevent_recipe = self.get_recipe('libevent', self.ctx)
+        boost_recipe = self.get_recipe('boost', self.ctx)
 
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} {}'.format(
-                self.stl_include_dir,
-                libdb_recipe.include_flags(arch)
+            self.stl_include_dir,
+            libdb_recipe.include_flags(arch),
+            boost_recipe.get_build_dir(arch.arch)
         )
 
         env['LDFLAGS'] = env.get('LDFLAGS', '') + ' -L{} -l{}'.format(
