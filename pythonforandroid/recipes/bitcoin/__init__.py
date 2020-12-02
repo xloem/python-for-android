@@ -30,6 +30,8 @@ class BitcoinRecipe(Recipe):
             self.stl_lib_name
         )
 
+        return env
+
     def build_arch(self, arch: Arch) -> None:
         env = self.get_recipe_env(arch)
         with current_directory(self.get_build_dir(arch.arch)):
