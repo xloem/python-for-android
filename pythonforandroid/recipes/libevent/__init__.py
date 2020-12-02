@@ -53,4 +53,4 @@ class LibEventRecipe(Recipe):
             #shprint(sh.make, 'install', _env=env)
 
 
-recipe = LibDBRecipe()
+recipe = LibEventRecipe()
