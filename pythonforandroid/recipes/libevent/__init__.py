@@ -11,7 +11,13 @@ class LibEventRecipe(Recipe):
     url = 'https://github.com/libevent/libevent/releases/download/release-{version}-stable/libevent-{version}-stable.tar.gz'
     sha256sum = '92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb'
 
-    #built_libraries = { 'libdb_stl-4.8.so': 'install/lib' }
+    built_libraries = {
+        'libevent-2.1.so': '.libs',
+        'libevent_core-2.1.so': '.libs',
+        'libevent_extra-2.1.so': '.libs',
+        'libevent_openssl-2.1.so': '.libs',
+        'libevent_pthreads-2.1.so': '.libs'
+    }
     depends = ['openssl']
 
     #patches = ['config.patch', 'atomic_init.patch']

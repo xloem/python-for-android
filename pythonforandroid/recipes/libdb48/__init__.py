@@ -61,7 +61,7 @@ class LibDBRecipe(Recipe):
                 '--enable-cxx',
                 '--enable-stl',
                 '--prefix={}'.format(self.install_dir(arch)),
-                '--includedir={}/db48/include'.format(self.install_dir(arch)),
+                '--includedir={}/include/db48'.format(self.install_dir(arch)),
                 _env=env)
             shprint(sh.make, '-j', str(cpu_count()), _env=env)
             shprint(sh.make, 'install', _env=env)
