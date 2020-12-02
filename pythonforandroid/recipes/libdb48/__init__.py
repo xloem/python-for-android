@@ -13,7 +13,7 @@ class LibDBRecipe(Recipe):
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
 
-    patches = ['config.patch']
+    patches = ['config.patch', 'atomic_init.patch']
 
     def install_dir(self, arch):
         return join(self.get_build_dir(arch.arch), 'install')
