@@ -13,6 +13,8 @@ class LibDBRecipe(Recipe):
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
 
+    patches = ['config.patch']
+
     def install_dir(self, arch):
         return join(self.get_build_dir(arch.arch), 'install')
 
@@ -49,7 +51,7 @@ class LibDBRecipe(Recipe):
                     'dist',
                     'configure'
                 )),
-                #'--host=arm-linux-androideabi',
+                '--host=arm-linux-androideabi',
                 '--enable-shared',
                 '--disable-static',
                 '--enable-cxx',
