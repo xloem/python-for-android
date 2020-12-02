@@ -13,7 +13,7 @@ class BitcoinRecipe(Recipe):
     url = 'https://bitcoincore.org/bin/bitcoin-core-{version}/bitcoin-{version}.tar.gz'
     sha256sum = '4bbd62fd6acfa5e9864ebf37a24a04bc2dcfe3e3222f056056288d854c53b978'
 
-    depends = ['libsecp256k1', 'libdb48']
+    depends = ['libsecp256k1', 'libdb48', 'libevent']
 
     def get_recipe_env(self, arch=None, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)

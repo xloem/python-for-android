@@ -38,10 +38,9 @@ class LibDBRecipe(Recipe):
             openssl_recipe.include_flags(arch),
             self.stl_include_dir
         )
-        env['LIBS'] = '{} {} {} -L{} -l{}'.format(
+        env['LIBS'] = '{} {} -L{} -l{}'.format(
             env.get('LIBS', ''),
-            openssl_recipe.link_libs_flags(),
-            openssl_recipe.link_dirs_flags(arch),
+            openssl_recipe.link_flags(arch),
             self.get_stl_lib_dir(arch),
             self.stl_lib_name
         )
