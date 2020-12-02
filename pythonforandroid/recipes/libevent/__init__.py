@@ -40,7 +40,7 @@ class LibEventRecipe(Recipe):
 
         with current_directory(join(self.get_build_dir(arch.arch))):
             shprint(
-                sh.Command('configure'),
+                sh.Command('./configure'),
                 '--host=arm-linux-androideabi',
                 '--enable-shared',
                 '--disable-static',
