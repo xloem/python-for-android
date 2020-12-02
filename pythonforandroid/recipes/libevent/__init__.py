@@ -35,7 +35,7 @@ class LibEventRecipe(Recipe):
         )
         env['LIBS'] = '{} {}'.format(
             env.get('LIBS', ''),
-            openssl_recipe.link_dirs_flags(),
+            openssl_recipe.link_dirs_flags(arch),
         )
 
         with current_directory(join(self.get_build_dir(arch.arch))):
