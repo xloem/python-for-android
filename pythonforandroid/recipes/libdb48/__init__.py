@@ -10,7 +10,12 @@ class LibDBRecipe(Recipe):
     version = '4.8.30'
     url = 'https://download.oracle.com/berkeley-db/db-{version}.tar.gz'
     sha256sum = 'e0491a07cdb21fb9aa82773bbbedaeb7639cbd0e7f96147ab46141e0045db72a'
-    # built_libraries = {'libdb.so': 'build_unix/.libs'}
+
+    built_libraries = {
+        'libdb-4.8.so': 'install/lib', # not actually used
+        'libdb_cxx-4.8.so': 'install/lib',
+        'libdb_stl-4.8.so': 'install/lib' # not actually used
+    }
     depends = ['openssl']
 
     patches = ['config.patch', 'atomic_init.patch']
