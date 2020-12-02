@@ -22,7 +22,7 @@ class BitcoinRecipe(Recipe):
         libevent_recipe = self.get_recipe('libevent', self.ctx)
         boost_recipe = self.get_recipe('boost', self.ctx)
 
-        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} {}'.format(
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} {} -I{}'.format(
             self.stl_include_dir,
             libdb_recipe.include_flags(arch),
             boost_recipe.get_build_dir(arch.arch)
