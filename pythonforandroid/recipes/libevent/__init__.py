@@ -27,6 +27,8 @@ class LibEventRecipe(Recipe):
     def build_arch(self, arch):
         env = self.get_recipe_env(arch)
 
+        openssl_recipe = self.get_recipe('openssl', self.ctx)
+
         env['CPPFLAGS'] = '{} {}'.format(
             env.get('CPPFLAGS', ''),
             openssl_recipe.include_flags(arch)
