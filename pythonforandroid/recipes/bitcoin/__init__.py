@@ -19,11 +19,10 @@ class BitcoinRecipe(Recipe):
         env = super().get_recipe_env(arch, with_flags_in_cc)
 
         libdb_recipe = self.get_recipe('libdb', self.ctx)
-        libdb_dir = libdb_recipe.get_build_dir(arch.arch)
 
-        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} -I{}'.format(
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} {}'.format(
                 self.stl_include_dir,
-                libdb_dir
+                libdb_recipe.include_flags(arch)
         )
 
         env['LDFLAGS'] = env.get('LDFLAGS', '') + ' -L{} -l{}'.format(

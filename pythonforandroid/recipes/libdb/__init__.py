@@ -13,6 +13,14 @@ class LibDBRecipe(Recipe):
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
 
+    def install_dir(self, arch):
+        return join(self.get_build_dir(arch.arch), 'install')
+
+    def include_flags(self, arch):
+        '''Returns a string with the include folders'''
+        libdb_includes = join(self.install_dir(arch), 'include')
+        return ' -I' + libdb_includes
+
     def build_arch(self, arch):
         env = self.get_recipe_env(arch)
 
@@ -44,7 +52,7 @@ class LibDBRecipe(Recipe):
                 '--disable-static',
                 '--enable-cxx',
                 '--enable-stl',
-                '--prefix={}'.format(self.ctx.get_python_install_dir()),
+                '--prefix={}'.format(self.install_dir()),
                 _env=env)
             shprint(sh.make, '-j', str(cpu_count()), _env=env)
             shprint(sh.make, 'install', _env=env)
