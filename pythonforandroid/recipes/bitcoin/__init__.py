@@ -42,6 +42,7 @@ class BitcoinRecipe(Recipe):
                 '--prefix=' + self.ctx.get_python_install_dir(),
                 '--enable-shared',
                 '--disable-static',
+                'ac_cv_c_bigendian=no',
                 _env=env)
             shprint(
                 sh.make,
