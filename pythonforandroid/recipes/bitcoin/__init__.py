@@ -19,6 +19,7 @@ class BitcoinRecipe(Recipe):
         env = super().get_recipe_env(arch, with_flags_in_cc)
 
         libdb_recipe = self.get_recipe('libdb48', self.ctx)
+        libevent_recipe = self.get_recipe('libevent', self.ctx)
 
         env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -I{} {}'.format(
                 self.stl_include_dir,
@@ -29,6 +30,8 @@ class BitcoinRecipe(Recipe):
             self.get_stl_lib_dir(arch),
             self.stl_lib_name
         )
+
+        env['PKG_CONFIG_PATH'] = env.get('PKG_CONFIG_PATH', '') + ':' + libevent_recipe.pkg_config_path(arch)
 
         return env
 

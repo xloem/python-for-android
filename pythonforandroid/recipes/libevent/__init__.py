@@ -22,13 +22,16 @@ class LibEventRecipe(Recipe):
 
     #patches = ['config.patch', 'atomic_init.patch']
 
-    #def install_dir(self, arch):
-    #    return join(self.get_build_dir(arch.arch), 'install')
+    def install_dir(self, arch):
+        return join(self.get_build_dir(arch.arch), 'install')
 
-    #def include_flags(self, arch):
-    #    '''Returns a string with the include folders'''
-    #    libdb_includes = join(self.install_dir(arch), 'include')
-    #    return ' -I' + libdb_includes
+    def include_flags(self, arch):
+        '''Returns a string with the include folders'''
+        libdb_includes = join(self.install_dir(arch), 'include')
+        return ' -I' + libdb_includes
+
+    def pkg_config_path(self, arch):
+        return join(self.install_dir(arch), 'lib', 'pkgconfig')
 
     def build_arch(self, arch):
         env = self.get_recipe_env(arch)
@@ -50,11 +53,11 @@ class LibEventRecipe(Recipe):
                 '--host=arm-linux-androideabi',
                 '--enable-shared',
                 '--disable-static',
-                #'--prefix={}'.format(self.install_dir(arch)),
+                '--prefix={}'.format(self.install_dir(arch)),
                 #'--includedir={}/db48/include'.format(self.install_dir(arch)),
                 _env=env)
             shprint(sh.make, '-j', str(cpu_count()), _env=env)
-            #shprint(sh.make, 'install', _env=env)
+            shprint(sh.make, 'install', _env=env)
 
 
 recipe = LibEventRecipe()
