@@ -49,7 +49,7 @@ class LibDBRecipe(Recipe):
                     'dist',
                     'configure'
                 )),
-                '--host=arm-linux-androideabi',
+                #'--host=arm-linux-androideabi',
                 '--enable-shared',
                 '--disable-static',
                 '--enable-cxx',
