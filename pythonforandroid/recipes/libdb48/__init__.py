@@ -7,9 +7,9 @@ from multiprocessing import cpu_count
 
 
 class LibDBRecipe(Recipe):
-    version = '18.1.32'
-    url = 'https://gentoo.osuosl.org/distfiles/db-{version}.tar.gz'
-    sha256sum = 'fa1fe7de9ba91ad472c25d026f931802597c29f28ae951960685cde487c8d654'
+    version = '4.8.30'
+    url = 'https://download.oracle.com/berkeley-db/db-{version}.tar.gz'
+    sha256sum = 'e0491a07cdb21fb9aa82773bbbedaeb7639cbd0e7f96147ab46141e0045db72a'
     # built_libraries = {'libdb.so': 'build_unix/.libs'}
     depends = ['openssl']
 
@@ -26,16 +26,18 @@ class LibDBRecipe(Recipe):
 
         openssl_recipe = self.get_recipe('openssl', self.ctx)
 
-        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + '{} -I {}'.format(
+        env['CPPFLAGS'] = '{} {} -I {}'.format(
+            env.get('CPPFLAGS', ''),
             openssl_recipe.include_flags(arch),
             self.stl_include_dir
         )
-        env['LDFLAGS'] = env.get('LDFLAGS', '') + ' {} -L{} -l{}'.format(
+        env['LIBS'] = '{} {} {} -L{} -l{}'.format(
+            env.get('LIBS', ''),
+            openssl_recipe.link_libs_flags(),
             openssl_recipe.link_dirs_flags(arch),
             self.get_stl_lib_dir(arch),
             self.stl_lib_name
         )
-        env['LIBS'] = env.get('LIBS', '') + openssl_recipe.link_libs_flags()
 
         with current_directory(join(
             self.get_build_dir(arch.arch),
