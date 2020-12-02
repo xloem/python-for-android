@@ -12,11 +12,11 @@ class LibEventRecipe(Recipe):
     sha256sum = '92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb'
 
     built_libraries = {
-        'libevent-2.1.so': '.libs',
-        'libevent_core-2.1.so': '.libs',
-        'libevent_extra-2.1.so': '.libs',
-        'libevent_openssl-2.1.so': '.libs',
-        'libevent_pthreads-2.1.so': '.libs'
+        'libevent-2.1.so': 'install/lib',
+        'libevent_core-2.1.so': 'install/lib',
+        'libevent_extra-2.1.so': 'install/lib',
+        'libevent_openssl-2.1.so': 'install/lib',
+        'libevent_pthreads-2.1.so': 'install/lib'
     }
     depends = ['openssl']
 
