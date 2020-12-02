@@ -46,7 +46,7 @@ class LibEventRecipe(Recipe):
                 '--disable-static',
                 #'--prefix={}'.format(self.install_dir(arch)),
                 #'--includedir={}/db48/include'.format(self.install_dir(arch)),
-                _env=env)
+                _env=env))
             shprint(sh.make, '-j', str(cpu_count()), _env=env)
             #shprint(sh.make, 'install', _env=env)
 
