@@ -6,8 +6,11 @@ from os.path import join
 
 
 class AudiostreamRecipe(CythonRecipe):
-    version = 'b32e3a4b30ef4bb529ae0f3b2bb0a35350ce5aca'
+    # audiostream has no tagged versions; this is the latest commit to master 2020-12-22
+    # it includes a fix for the dyload issue on android that was preventing use
+    version = '69f6b100f1ea4e3982a1acf6bbb0804e31a2cd50'
     url = 'https://github.com/kivy/audiostream/archive/{version}.zip'
+    sha256sum = '4d415c91706fd76865d0d22f1945f87900dc42125ff5a6c8d77898ccdf613c21'
     name = 'audiostream'
     depends = ['python3', 'sdl2', 'pyjnius']
 
@@ -27,10 +30,13 @@ class AudiostreamRecipe(CythonRecipe):
         return env
 
     def postbuild_arch(self, arch):
-        # TODO: It looks like this happened automatically in the past.
+        # TODO: This code was copied from pyjnius, but judging by the
+        #       audiostream history, it looks like this step might have
+        #       happened automatically in the past.
         #       Given the goal of migrating off of recipes, it would
         #       be good to repair or build infrastructure for doing this
-        #       automatically.
+        #       automatically, for when including a java class is
+        #       the best solution to a problem.
         super().postbuild_arch(arch)
         info('Copying audiostream java files to classes build dir')
         with current_directory(self.get_build_dir(arch.arch)):
