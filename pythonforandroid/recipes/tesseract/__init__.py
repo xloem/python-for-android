@@ -46,6 +46,7 @@ class TesseractRecipe(Recipe):
                 '--enable-static=no',
                 'ac_cv_c_bigendian=no',
                 'ac_cv_sys_file_offset_bits=32',
+                '--disable-tessdata-prefix',
                 'CPPFLAGS=-DTESSDATA_PREFIX=/{}/'.format(tessdata_dir),
                 _env=env)
             shprint(sh.make, '-j' + str(cpu_count() + 1), _env=env)
