@@ -45,7 +45,7 @@ class LibLeptonicaRecipe(Recipe):
             shprint(sh.make, '-j' + str(cpu_count() + 1), _env=env)
 
             # make the install so we can get the config header with the other headers
-            shprint(sh.make, 'install', _env=env)
+            shprint(sh.make, 'install', 'DEFINES=-DMINIMUM_SEVERITY=1', _env=env)
 
 
 recipe = LibLeptonicaRecipe()
