@@ -19,7 +19,7 @@ class TesseractRecipe(Recipe):
     depends = ['libleptonica']
     need_stl_shared = True
     built_libraries = {'libtesseract.so': os.path.join('api', '.libs')}
-    patches = ['android_rt.patch', 'remove-version-info-4.patch', 'android_app_path.patch']
+    patches = ['android_rt.patch', 'remove-version-info-4.patch', 'android_app_path-4.patch']
 
     def get_recipe_env(self, arch, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
