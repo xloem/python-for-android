@@ -14,7 +14,10 @@ class TessdataRecipe(Recipe):
     md5sum = 'e7460097802be761a88f1b93e9f2349c'
     sha256sum = 'f1b71e97f27bafffb6a730ee66fd9dc021afc38f318fdc80a464a84a519227fe'
 
-    languages = 'eng,equ,osd'
+    languages = 'lat'#eng,equ,osd'
+    # equ, osd are in non-fast tessdata.
+    # a reasonable thing here is that each file also has an individual download url.  
+    # be nice to download from all of them.  probably a good answer in the existing download function.
 
     def postbuild_arch(self, arch):
         super().postbuild_arch(arch)
