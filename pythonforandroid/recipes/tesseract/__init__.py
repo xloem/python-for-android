@@ -15,7 +15,7 @@ class TesseractRecipe(Recipe):
     depends = ['libleptonica']
     need_stl_shared = True
     built_libraries = {'libtesseract.so': os.path.join('api', '.libs')}
-    patches = ['android_rt.patch', 'remove-version-info-3.patch']
+    patches = ['android_rt.patch', 'remove-version-info-3.patch', 'android_app_path.patch']
 
     def get_recipe_env(self, arch, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)
@@ -41,14 +41,13 @@ class TesseractRecipe(Recipe):
                 '--host={}'.format(arch.command_prefix),
                 '--target={}'.format(arch.toolchain_prefix),
                 '--prefix={}'.format(install_dir),
-                '--datadir={}'.format(tessdata_dir),
                 '--enable-embedded',
                 '--enable-shared=yes',
                 '--enable-static=no',
                 'ac_cv_c_bigendian=no',
                 'ac_cv_sys_file_offset_bits=32',
                 _env=env)
-            shprint(sh.make, '-j' + str(cpu_count() + 1), _env=env)
+            shprint(sh.make, '-DTESSDATA_PREFIX=/{}'.format(tessdata_dir), '-j' + str(cpu_count() + 1), _env=env)
 
             # make the install so the headers are collected in the right subfolder
             shprint(sh.make, 'install', _env=env)
