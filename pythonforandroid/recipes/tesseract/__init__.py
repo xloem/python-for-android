@@ -33,6 +33,7 @@ class TesseractRecipe(Recipe):
         source_dir = self.get_build_dir(arch.arch)
         install_dir = self.ctx.get_python_install_dir()
         tessdata_dir = '_python_bundle/site-packages/share'
+        env['CPPFLAGS'] = env.get('CPPFLAGS', '') + ' -DTESSDATA_PREFIX=/{}/'.format(tessdata_dir)
 
         with current_directory(source_dir):
             shprint(sh.Command('./autogen.sh'))
@@ -44,10 +45,9 @@ class TesseractRecipe(Recipe):
                 '--enable-embedded',
                 '--enable-shared=yes',
                 '--enable-static=no',
+                '--disable-tessdata-prefix',
                 'ac_cv_c_bigendian=no',
                 'ac_cv_sys_file_offset_bits=32',
-                '--disable-tessdata-prefix',
-                'CPPFLAGS=-DTESSDATA_PREFIX=/{}/'.format(tessdata_dir),
                 _env=env)
             shprint(sh.make, '-j' + str(cpu_count() + 1), _env=env)
 
