@@ -1,9 +1,7 @@
 from pythonforandroid.recipe import Recipe
-from pythonforandroid.logger import shprint
-from pythonforandroid.util import current_directory
-from multiprocessing import cpu_count
-import os
+from pythonforandroid.toolchain import shprint, current_directory, info
 import sh
+from os.path import join
 
 class TessdataRecipe(Recipe):
     version = '3.04.00'
@@ -19,7 +17,7 @@ class TessdataRecipe(Recipe):
         env = self.get_recipe_env(arch)
         languages = env.get('TESSDATA_LANGS', self.languages).split(',')
 
-        install_dir = os.path.join(self.ctx.get_python_install_dir(), 'share', 'tessdata')
+        install_dir = join(self.ctx.get_python_install_dir(), 'share', 'tessdata')
 
         info('Copying tesseract traineddata files for ' + ', '.join(languages))
         shprint(sh.mkdir, '-p', install_dir)
