@@ -1,0 +1,17 @@
+diff --git a/src/ccutil/mainblk.cpp b/src/ccutil/mainblk.cpp
+index 52b04b04..cb66282d 100644
+--- a/src/ccutil/mainblk.cpp
++++ b/src/ccutil/mainblk.cpp
+@@ -69,9 +69,11 @@ void CCUtil::main_setup(const char *argv0, const char *basename) {
+ #if defined(TESSDATA_PREFIX)
+   } else {
+ /* Use tessdata prefix which was compiled in. */
++/* Patch: prefix with the android app path. */
++    datadir = getenv("ANDROID_APP_PATH");
+ #define _STR(a) #a
+ #define _XSTR(a) _STR(a)
+-    datadir = _XSTR(TESSDATA_PREFIX) "/tessdata";
++    datadir += _XSTR(TESSDATA_PREFIX) "/tessdata";
+ #undef _XSTR
+ #undef _STR
+ #endif

@@ -7,15 +7,19 @@ import sh
 
 
 class TesseractRecipe(Recipe):
-    version = '3.05.02'
+    version = '4.1.1'
+    #version = '3.05.02'
     url = 'https://github.com/tesseract-ocr/tesseract/archive/{version}.tar.gz'
-    md5sum = 'd3b8661f878aed931cf3a7595e69b989'
-    sha256sum = '494d64ffa7069498a97b909a0e65a35a213989e0184f1ea15332933a90d43445'
+    #md5sum = 'd3b8661f878aed931cf3a7595e69b989'
+    #sha256sum = '494d64ffa7069498a97b909a0e65a35a213989e0184f1ea15332933a90d43445'
+    md5sum = '51fe2bcbff1bbce77a25d180fd247f7d'
+    sha256sum = '2a66ff0d8595bff8f04032165e6c936389b1e5727c3ce5a27b3e059d218db1cb'
+    
 
     depends = ['libleptonica']
     need_stl_shared = True
     built_libraries = {'libtesseract.so': os.path.join('api', '.libs')}
-    patches = ['android_rt.patch', 'remove-version-info-3.patch', 'android_app_path.patch']
+    patches = ['android_rt.patch', 'remove-version-info-4.patch', 'android_app_path.patch']
 
     def get_recipe_env(self, arch, with_flags_in_cc=True):
         env = super().get_recipe_env(arch, with_flags_in_cc)

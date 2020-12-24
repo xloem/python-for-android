@@ -1,0 +1,13 @@
+diff --git a/src/api/Makefile.am b/src/api/Makefile.am
+index 2d4a79b0..932d1563 100644
+--- a/src/api/Makefile.am
++++ b/src/api/Makefile.am
+@@ -80,7 +80,7 @@ if SSE41_OPT
+ libtesseract_la_LIBADD += ../arch/libtesseract_sse.la
+ endif
+ 
+-libtesseract_la_LDFLAGS += -version-info $(GENERIC_LIBRARY_VERSION) $(NOUNDEFINED)
++libtesseract_la_LDFLAGS += -avoid-version $(NOUNDEFINED)
+ 
+ bin_PROGRAMS = tesseract
+ tesseract_SOURCES = tesseractmain.cpp
