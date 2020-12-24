@@ -11,7 +11,7 @@ class TessdataRecipe(Recipe):
     md5sum = 'b25e830d203af5c863081af3f684b53a'
     sha256sum = '5dcb37198336b6953843b461ee535df1401b41008d550fc9e43d0edabca7adb1'
 
-    languages = ['eng,equ,osd']
+    languages = 'eng,equ,osd'
 
     def postbuild_arch(self, arch):
         super().postbuild_arch(arch)
