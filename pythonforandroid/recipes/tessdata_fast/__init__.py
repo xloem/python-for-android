@@ -6,7 +6,7 @@ from os.path import join
 class TessdataRecipe(Recipe):
     #version = '3.04.00'
     version = '4.0.0'
-https://github.com/tesseract-ocr/tessdata_fast/archive/4.0.0.tar.gz
+
     url = 'https://github.com/tesseract-ocr/tessdata_fast/archive/{version}.tar.gz'
     #url = 'https://github.com/tesseract-ocr/tessdata/archive/{version}.tar.gz'
     #md5sum = 'b25e830d203af5c863081af3f684b53a'
