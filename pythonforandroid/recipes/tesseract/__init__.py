@@ -46,8 +46,9 @@ class TesseractRecipe(Recipe):
                 '--enable-static=no',
                 'ac_cv_c_bigendian=no',
                 'ac_cv_sys_file_offset_bits=32',
+                'CPPFLAGS=-DTESSDATA_PREFIX=/{}/'.format(tessdata_dir)
                 _env=env)
-            shprint(sh.make, '-DTESSDATA_PREFIX=/{}'.format(tessdata_dir), '-j' + str(cpu_count() + 1), _env=env)
+            shprint(sh.make, '-j' + str(cpu_count() + 1), _env=env)
 
             # make the install so the headers are collected in the right subfolder
             shprint(sh.make, 'install', _env=env)
