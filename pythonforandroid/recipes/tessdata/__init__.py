@@ -16,7 +16,7 @@ class TessdataRecipe(Recipe):
     def postbuild_arch(self, arch):
         super().postbuild_arch(arch)
 
-        env = self.get_recipe_enbv(arch)
+        env = self.get_recipe_env(arch)
         languages = env.get('TESSDATA_LANGS', self.languages).split(',')
 
         install_dir = join(self.ctx.get_python_install_dir(), 'share', 'tessdata'))
