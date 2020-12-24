@@ -32,6 +32,7 @@ class TesseractRecipe(Recipe):
 
         source_dir = self.get_build_dir(arch.arch)
         install_dir = self.ctx.get_python_install_dir()
+        tessdata_dir = '_python_bundle/site-packages/share'
 
         with current_directory(source_dir):
             shprint(sh.Command('./autogen.sh'))
@@ -40,6 +41,7 @@ class TesseractRecipe(Recipe):
                 '--host={}'.format(arch.command_prefix),
                 '--target={}'.format(arch.toolchain_prefix),
                 '--prefix={}'.format(install_dir),
+                '--datadir={}'.format(tessdata_dir),
                 '--enable-embedded',
                 '--enable-shared=yes',
                 '--enable-static=no',

@@ -19,11 +19,14 @@ class TessdataRecipe(Recipe):
         env = self.get_recipe_enbv(arch)
         languages = env.get('TESSDATA_LANGS', self.languages).split(',')
 
+        install_dir = join(self.ctx.get_python_install_dir(), 'share', 'tessdata'))
+
         info('Copying tesseract traineddata files for ' + ', '.join(languages))
+        shprint(sh.mkdir, '-p', install_dir)
         with current_directory(self.get_build_dir(arch.arch)):
             shprint(sh.cp, '-a',
                 *('{}.traineddata'.format(lang) for lang in languages),
-                join(self.ctx.get_python_install_dir(), 'shared', 'tessdata'))
+                install_dir)
 
 
 recipe = TessdataRecipe()
